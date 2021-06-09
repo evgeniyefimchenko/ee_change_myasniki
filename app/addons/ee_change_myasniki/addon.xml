@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<addon scheme="3.0">
+    <id>ee_change_myasniki</id>
+    <version>1.0.0</version>
+    <status>active</status>
+    <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+    <default_language>ru</default_language>
+
+    <has_icon>Y</has_icon>
+    <supplier>efimchenko.ru</supplier>
+    <supplier_link>https://efimchenko.ru</supplier_link>
+    <functions>
+        <item for="install">fn_ee_change_myasniki_install</item>
+        <item for="uninstall">fn_ee_change_myasniki_uninstall</item>
+    </functions>
+</addon>

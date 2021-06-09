@@ -1,0 +1,25 @@
+msgid ""
+msgstr "Project-Id-Version: tygh"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: Russian\n"
+"Language: ru_RU"
+
+msgctxt "Addons::name::ee_change_myasniki"
+msgid "ee_change_myasniki_name"
+msgstr "[efimchenko.ru] Изменения на сайте"
+
+msgctxt "Addons::description::ee_change_myasniki"
+msgid "ee_change_myasniki_description"
+msgstr "Изменения на сайте."
+
+msgctxt "SettingsSections::ee_change_myasniki::general"
+msgid "ee_change_myasniki_general"
+msgstr "Общее"
+
+msgctxt "SettingsOptions::ee_change_myasniki::ee_change_myasniki_active"
+msgid "ee_change_myasniki_active"
+msgstr "Активировать"
+
+msgctxt "SettingsTooltips::ee_change_myasniki::ee_change_myasniki_active"
+msgid "ee_change_myasniki_active_tooltips"
+msgstr "Подсказка"
