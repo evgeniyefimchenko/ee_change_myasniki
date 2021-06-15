@@ -3,7 +3,7 @@ if (!defined('BOOTSTRAP')) { die('Access denied'); }
 
 use Tygh\Registry;
 
-function fn_ee_change_myasniki_install() {
+function fn_ee_change_myasniki_install() {	
 	return true;
 }
 
