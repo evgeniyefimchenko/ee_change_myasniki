@@ -22,7 +22,7 @@ msgstr "Активировать"
 
 msgctxt "SettingsTooltips::ee_change_myasniki::ee_change_myasniki_active"
 msgid "ee_change_myasniki_active_tooltips"
-msgstr "Подсказка"
+msgstr "Активирует скрытие чекбокса в админпанели"
 
 msgctxt "Languages::sort_by_code_asc"
 msgid "sort_by_sku_asc"
