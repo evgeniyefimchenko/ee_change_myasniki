@@ -14,3 +14,7 @@ function fn_ee_change_myasniki_uninstall() {
 function fn_ee_change_myasniki_products_sorting(&$sorting, $simple_mode) {
 	$sorting['code'] = array('description' => 'code', 'default_order' => 'desc');
 }
+
+function fn_ee_change_myasniki_get_products_pre(&$params, $items_per_page, $lang_code) {
+	$params['match'] = 'all';
+}
