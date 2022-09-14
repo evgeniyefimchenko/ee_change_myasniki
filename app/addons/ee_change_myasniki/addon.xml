@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<addon scheme="3.0">
+    <id>ee_change_myasniki</id>
+    <version>1.0.12</version>
+    <status>active</status>
+    <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+    <default_language>ru</default_language>
+
+    <has_icon>Y</has_icon>
+    <supplier>efimchenko.ru</supplier>
+    <supplier_link>https://efimchenko.ru</supplier_link>
+	
+    <settings layout="separate" edition_type="ROOT,VENDOR,STOREFRONT">
+        <sections>
+            <section id="general">
+                <items>
+					<item id="ee_change_myasniki_active">
+						<type>checkbox</type>
+					</item>
+					<item id="active_prod_table">
+						<type>checkbox</type>
+					</item>
+                </items>
+            </section>		
+        </sections>
+    </settings>	
+	
+    <functions>
+        <item for="install">fn_ee_change_myasniki_install</item>
+        <item for="uninstall">fn_ee_change_myasniki_uninstall</item>
+    </functions>
+</addon>
