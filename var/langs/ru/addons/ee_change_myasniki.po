@@ -24,6 +24,14 @@ msgctxt "SettingsTooltips::ee_change_myasniki::ee_change_myasniki_active"
 msgid "ee_change_myasniki_active_tooltips"
 msgstr "Активирует скрытие чекбокса в админпанели"
 
+msgctxt "SettingsOptions::ee_change_myasniki::active_prod_table"
+msgid "active_prod_table"
+msgstr "Изменения в таблице товаров"
+
+msgctxt "SettingsTooltips::ee_change_myasniki::active_prod_table"
+msgid "active_prod_table_tooltips"
+msgstr "Активирует изменения в таблице товаров"
+
 msgctxt "Languages::sort_by_code_asc"
 msgid "sort_by_sku_asc"
 msgstr "Сортировать по артикулу: От А до Я"
