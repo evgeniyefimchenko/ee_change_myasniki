@@ -9,11 +9,14 @@
 	margin: 0;
  }
  .cm-om-totals-recalculate>td>button {
-	 visibility: hidden;
+	display: none!important;
  }
  .controls {
 	margin: 0;
 	display : contents;
+ }
+ .total.nowrap.cm-om-totals-price {
+	display: none!important;
  }
 </style>
 <table width="100%" class="table table--relative table-responsive table-middle order-management-products">
@@ -82,7 +85,7 @@
         {/if}
         <span class="{if $cp.stored_price == "Y"}hidden{/if}" id="db_price_{$key}">{include file="common/price.tpl" value=$original_price}</span>
         <div class="{if $cp.stored_price != "Y"}hidden{/if}" id="manual_price_{$key}">
-            {include file="common/price.tpl" value=$cp.base_price view="input" input_name="cart_products[`$key`][price]" class="input-hidden input-full" product_id=$cp.product_id}
+            {include file="common/price.tpl" value=$cp.base_price view="input" input_id="cart_products[`$key`][price]" input_name="cart_products[`$key`][price]" class="input-hidden input-full" product_id=$cp.product_id}
         </div>
     {/if}
     </td>
@@ -158,11 +161,15 @@
     </td>
 </tr>
     {$smarty.capture.extra_items nofilter}
-</table>
+	<tr>
+	<td colspan="7">
 {literal}
 	<script>
 		(function(_, $) {
 			function recalc_sum() {
+				$('.ee_quantity, [id^="manual_price_"]>input, .ee_discount_input, [name="subtotal_discount"], [name^="stored_shipping_cost"]').each(function(){
+					$(this).data('value', $(this).val());
+				});
 				$('.ee_recalc_tr').each(function() {
 					var quan = parseInt($(this).find('.ee_quantity').val());
 					var price = parseInt($(this).find('[id^="manual_price_"]>input').val());
@@ -171,28 +178,29 @@
 					if (disc) {
 						calc_sum = calc_sum - (disc * quan);
 					}
-					$(this).find('.ee_calc_sum').val(calc_sum).focus();					
+					setTimeout($(this).find('.ee_calc_sum').val(calc_sum).focus(), 3000);
 				});
-				//$('#elm_sidebar').prepend($('.span4'));
-				//$('.span4').addClass('sidebar-row').removeClass('span4').find('.controls').css('margin', '0');				
-			}		
-			recalc_sum();
-			$('.ee_quantity, [id^="manual_price_"]>input, .ee_discount_input, [name="subtotal_discount"], [name^="stored_shipping_cost"]').on({'blur' : function () {					
-				$('.hidden.cm-om-totals-recalculate').find('.btn.cm-ajax').click();
-				console.log('blur');
+				$('.ee_quantity, [id^="manual_price_"]>input, .ee_discount_input, [name="subtotal_discount"], [name^="stored_shipping_cost"]').on({'blur' : function () {
+					if ($(this).val() != $(this).data('value')) {
+						$('.hidden.cm-om-totals-recalculate').find('.btn.cm-ajax').click();
+					}
+				}});
+				$('#ee_button').click(function() {
+					$('[name="subtotal_discount"], .ee_discount_input').val(0);
+					$('.hidden.cm-om-totals-recalculate').find('.btn.cm-ajax').click();
+				});				
 			}
+			recalc_sum();
+			$.ceEvent('on', 'ce.ajaxdone', function(form, clicked_elm) {
+				recalc_sum();
 			});
-			/*
-			$.ceEvent('on', 'ce.formpre_om_cart_form', function(form, clicked_elm) {
-				if ($(clicked_elm).hasClass('btn-primary')) {
-					console.log('test');
-					//return false;
-				}
-			});*/
 			$('#elm_sidebar').prepend($('.span4'));
 		} (Tygh, Tygh.$));
 	</script>
-{/literal}
+{/literal}	
+	</td>
+	<tr>
+</table>
 <button type="button" id="ee_button" class="btn  btn-primary">Убрать все скидки</button>
 <!-- design/backend/templates/addons/ee_change_myasniki/overrides/views/order_management/components/products.tpl -->
 {else}
