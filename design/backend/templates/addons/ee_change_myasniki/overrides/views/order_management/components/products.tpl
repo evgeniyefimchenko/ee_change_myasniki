@@ -1,4 +1,4 @@
-{if $_REQUEST.test == 'test'}
+{if $runtime.controller == 'order_management' && $runtime.mode == 'update'}
 <style>
  .span8 {
 	 width: 100%!important;
@@ -73,7 +73,7 @@
             {__("free")}
             {else}
             <input type="hidden" name="cart_products[{$key}][stored_price]" value="N" />
-            <input style="display: none;" class="inline order-management-price-check-checkbox" type="checkbox" name="cart_products[{$key}][stored_price]" value="Y" {if $cp.stored_price == "Y"}checked="checked"{/if} onchange="Tygh.$('#db_price_{$key},#manual_price_{$key}').toggle();"/>
+            <input style="display: none;" class="inline order-management-price-check-checkbox" type="checkbox" name="cart_products[{$key}][stored_price]" value="Y" checked="checked" onchange="Tygh.$('#db_price_{$key},#manual_price_{$key}').toggle();"/>
         {/if}
     </td>
     <td class="left order-management-price">
@@ -97,9 +97,9 @@
         {if $cart.order_id}
         <input type="hidden" name="cart_products[{$key}][stored_discount]" value="Y" />
 		<input class="ee_discount" type="hidden" value="{$cp.discount}">
-        <input type="text" class="ee_discount_input input-hidden input-mini cm-numeric" size="5" name="cart_products[{$key}][discount]" value="{$cp.discount}" data-a-sign="{$currencies.$primary_currency.symbol|strip_tags nofilter}" data-a-dec="," data-a-sep="." />
+        <input type="text" class="ee_discount_input cm-numeric input-hidden input-full" size="5" name="cart_products[{$key}][discount]" value="{$cp.discount}" data-a-sign=" ₽ " data-p-sign="s" data-a-dec="." data-a-sep="," />
         {else}
-        {include file="common/price.tpl" value=$cp.discount}
+			{include file="common/price.tpl" value=$cp.discount class="input-hidden input-full"}
         {/if}
     {/if}
     </td>
@@ -108,7 +108,7 @@
 	{if $cp.discount}
 		{$calc_sum =$calc_sum - ($cp.amount * $cp.discount)}
 	{/if}
-	<td data-th="Сумма" width="20%"><input readonly type="text" data-a-dec="," data-a-sep="." style="width: 100%;" class="ee_calc_sum cm-numeric" value="{$calc_sum}" /></td>
+	<td data-th="Сумма" width="20%"><input readonly type="text" data-a-sign=" ₽ " data-p-sign="s" data-a-dec="." data-a-sep="," style="width: 100%;" class="ee_calc_sum cm-numeric input-hidden input-full" value="{$calc_sum}" /></td>
 	
     <td data-th="{__("options")}" width="3%" class="nowrap order-management-options">
         {if $cp.product_options}
@@ -171,14 +171,14 @@
 					$(this).data('value', $(this).val());
 				});
 				$('.ee_recalc_tr').each(function() {
-					var quan = parseInt($(this).find('.ee_quantity').val());
-					var price = parseInt($(this).find('[id^="manual_price_"]>input').val());
+					var quan = parseFloat($(this).find('.ee_quantity').val()).toFixed(2);
+					var price = parseFloat($(this).find('[id^="manual_price_"]>input').val()).toFixed(2);
 					var calc_sum = price * quan;
-					var disc = parseInt($(this).find('.ee_discount').val());
+					var disc = parseFloat($(this).find('.ee_discount').val()).toFixed(2);
 					if (disc) {
-						calc_sum = calc_sum - (disc * quan);
+						calc_sum = (calc_sum - (disc * quan)).toFixed(2);
 					}
-					setTimeout($(this).find('.ee_calc_sum').val(calc_sum).focus(), 3000);
+					setTimeout($('.ee_calc_sum').click(), 1000);
 				});
 				$('.ee_quantity, [id^="manual_price_"]>input, .ee_discount_input, [name="subtotal_discount"], [name^="stored_shipping_cost"]').on({'blur' : function () {
 					if ($(this).val() != $(this).data('value')) {
@@ -188,13 +188,15 @@
 				$('#ee_button').click(function() {
 					$('[name="subtotal_discount"], .ee_discount_input').val(0);
 					$('.hidden.cm-om-totals-recalculate').find('.btn.cm-ajax').click();
-				});				
+				});
+				$('[id^="db_price_"]').hide();
+				$('[id^="manual_price_"]').show();
 			}
 			recalc_sum();
 			$.ceEvent('on', 'ce.ajaxdone', function(form, clicked_elm) {
-				recalc_sum();
+				recalc_sum();				
 			});
-			$('#elm_sidebar').prepend($('.span4'));
+			$('#elm_sidebar').prepend($('.span4'));			
 		} (Tygh, Tygh.$));
 	</script>
 {/literal}	
