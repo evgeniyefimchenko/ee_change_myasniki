@@ -34,10 +34,12 @@ function fn_ee_change_myasniki_update_cart_products_post(&$cart, $product_data, 
 }
 
 function fn_ee_change_myasniki_calculate_cart_items($cart, &$cart_products, $auth, $apply_cart_promotions) {
-	foreach ($cart_products as $k => $v) {
-		unset($cart_products[$k]['discount']);
-		unset($cart_products[$k]['discount_prc']);
-		$cart_products[$k]['price'] = $cart_products[$k]['original_price'];
-		$cart_products[$k]['out_of_stock_actions'] = 'N';
+	if (isset($_REQUEST['dispatch']) && $_REQUEST['dispatch'] == 'order_management.update_totals' && $_REQUEST['result_ids'] == 'om_ajax_*') {
+		foreach ($cart_products as $k => $v) {
+			unset($cart_products[$k]['discount']);
+			unset($cart_products[$k]['discount_prc']);
+			$cart_products[$k]['price'] = $cart_products[$k]['original_price'];
+			$cart_products[$k]['out_of_stock_actions'] = 'N';
+		}
 	}
 }
