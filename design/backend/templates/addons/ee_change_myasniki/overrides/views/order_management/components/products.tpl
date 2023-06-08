@@ -19,6 +19,7 @@
 	display: none!important;
  }
 </style>
+{$cart.use_discount = 1}
 <table width="100%" class="table table--relative table-responsive table-middle order-management-products">
 <thead>
     <tr>
@@ -38,6 +39,12 @@
 {capture name="extra_items"}
     {hook name="order_management:products_extra_items"}{/hook}
 {/capture}
+
+{*Сортировка по коду*}
+	{$product_codes = array_column($cart_products, 'product_code')}
+	{$sort_order = SORT_DESC}
+	{array_multisort($product_codes, $sort_order, $cart_products)}
+{*Конец сортировке*}
 
 {foreach from=$cart_products item="cp" key="key"}
 {hook name="order_management:items_list_row"}
@@ -191,12 +198,17 @@
 				});
 				$('[id^="db_price_"]').hide();
 				$('[id^="manual_price_"]').show();
+				var sum = parseFloat($('.toggle-elm').parent().find('tr:eq(1)').find('span').text().replace(/\s+/g, '')).toFixed(2);
+				var mega_sum = sum - parseFloat($('.toggle-elm').find('span').text()).toFixed(2);
+				$('#mega_sum').text(mega_sum);
 			}
 			recalc_sum();
-			$.ceEvent('on', 'ce.ajaxdone', function(form, clicked_elm) {
+			$.ceEvent('on', 'ce.ajaxdone', function(elms, inline_scripts, params, data, text) {
+				if (!$('#mega_sum').length) $('.toggle-elm').after('<tr><td class="statistic-label">Сумма заказа с учетом скидки:</td><td class="right"><span id="mega_sum"></span>&nbsp;<span class="ty-rub">₽</span></td></tr>');	
 				recalc_sum();				
 			});
-			$('#elm_sidebar').prepend($('.span4'));			
+			$('#elm_sidebar').prepend($('.span4'));
+			$('.statuses').hide();						
 		} (Tygh, Tygh.$));
 	</script>
 {/literal}	
