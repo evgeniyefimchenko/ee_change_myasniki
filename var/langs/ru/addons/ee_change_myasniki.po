@@ -39,3 +39,19 @@ msgstr "Сортировать по артикулу: От А до Я"
 msgctxt "Languages::sort_by_code_desc"
 msgid "sort_by_sku_desc"
 msgstr "Сортировать по артикулу: От Я до А"
+
+msgctxt "SettingsOptions::ee_change_myasniki::timeon"
+msgid "timeon"
+msgstr "Начало блокировки"
+
+msgctxt "SettingsTooltips::ee_change_myasniki::timeon"
+msgid "timeon_tooltips"
+msgstr "Начало блокировки возможности редактирования заказов"
+
+msgctxt "SettingsOptions::ee_change_myasniki::timeoff"
+msgid "timeoff"
+msgstr "Завершение блокировки"
+
+msgctxt "SettingsTooltips::ee_change_myasniki::timeoff"
+msgid "timeoff_tooltips"
+msgstr "Завершение блокировки возможности редактирования заказов"

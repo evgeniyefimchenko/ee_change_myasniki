@@ -2,7 +2,7 @@
 
 use Tygh\Registry;
 
-if ($mode == 'update' || $mode == 'add') {
+if (in_array($mode, ['update_details', 'update_status', 'm_delete', 'm_update', 'delete', 'remove_cc_info', 'modify_invoice'])) {
     $addon_settings = Registry::get('addons.ee_change_myasniki');
     if ($addon_settings['ee_change_myasniki_active'] == 'Y') {
         // Извлекаем текущее время

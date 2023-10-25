@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <addon scheme="3.0">
     <id>ee_change_myasniki</id>
-    <version>1.1.7</version>
+    <version>1.1.9</version>
     <status>active</status>
     <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
     <default_language>ru</default_language>
@@ -22,6 +22,18 @@
 						<type>checkbox</type>
 						<default_value>Y</default_value>
 					</item>
+                    <item id="timeon">
+                        <type>input</type>
+                        <variants/>
+                    </item>
+                    <item id="timeoff">
+                        <type>input</type>
+                        <variants/>
+                    </item>					
+                    <item id="template">
+                        <type>template</type>
+                        <default_value>ee_time_off.tpl</default_value>
+                    </item>					
                 </items>
             </section>		
         </sections>
