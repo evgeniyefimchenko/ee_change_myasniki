@@ -29,7 +29,7 @@ function fn_ee_change_myasniki_update_cart_products_post(&$cart, &$product_data,
 }
 
 function fn_ee_change_myasniki_calculate_cart_items($cart, &$cart_products, $auth, $apply_cart_promotions) {
-	
+
 }
 
 /**

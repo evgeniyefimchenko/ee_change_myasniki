@@ -41,9 +41,7 @@
 {/capture}
 
 {*Сортировка по коду*}
-	{$product_codes = array_column($cart_products, 'product_code')}
-	{$sort_order = SORT_DESC}
-	{array_multisort($product_codes, $sort_order, $cart_products)}
+	{$cart_products = $cart_products|fn_ee_sort_cart_products}
 {*Конец сортировке*}
 
 {foreach from=$cart_products item="cp" key="key"}
@@ -185,7 +183,7 @@
 					if (disc) {
 						calc_sum = (calc_sum - (disc * quan)).toFixed(2);
 					}
-					setTimeout($('.ee_calc_sum').click(), 1000);
+					$('.ee_calc_sum').click();
 				});
 				$('.ee_quantity, [id^="manual_price_"]>input, .ee_discount_input, [name="subtotal_discount"], [name^="stored_shipping_cost"]').on({'blur' : function () {
 					if ($(this).val() != $(this).data('value')) {

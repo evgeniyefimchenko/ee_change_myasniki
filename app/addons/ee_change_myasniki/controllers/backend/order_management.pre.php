@@ -3,8 +3,8 @@
 use Tygh\Registry;
 
 if (in_array($mode,['add', 'place_order', 'update_totals', 'delete', 'delete_coupon', 'delete_file', 'update_payment', 'update_shipping'])) {
-    $addon_settings = Registry::get('addons.ee_change_myasniki');
     if ($addon_settings['ee_change_myasniki_active'] == 'Y') {
+		$addon_settings = Registry::get('addons.ee_change_myasniki');    
         // Извлекаем текущее время
         $current_time = time();
         // Конвертируем timeon и timeoff в timestamp
